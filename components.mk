@@ -15,6 +15,7 @@
 ifneq (,$(filter all, $(TARGET_COMMON_QTI_COMPONENTS)))
 TARGET_COMMON_QTI_COMPONENTS := \
     adreno \
+    alarm \
     audio \
     av \
     bt \
@@ -43,6 +44,11 @@ ifneq (,$(filter adreno, $(TARGET_COMMON_QTI_COMPONENTS)))
   else
     include $(QCOM_COMMON_PATH)/vendor/adreno-6xx-legacy/qti-adreno-6xx-legacy.mk
   endif
+endif
+
+ifneq (,$(filter alarm, $(TARGET_COMMON_QTI_COMPONENTS)))
+  include $(QCOM_COMMON_PATH)/system/alarm/qti-alarm.mk
+  include $(QCOM_COMMON_PATH)/vendor/alarm/qti-alarm.mk
 endif
 
 ifneq (,$(filter audio, $(TARGET_COMMON_QTI_COMPONENTS)))
@@ -138,12 +144,7 @@ ifneq (,$(filter vibrator, $(TARGET_COMMON_QTI_COMPONENTS)))
 endif
 
 ifneq (,$(filter wfd, $(TARGET_COMMON_QTI_COMPONENTS)))
-  ifeq ($(call is-board-platform-in-list,$(3_18_FAMILY) $(4_4_FAMILY) msm8953),true)
-    include $(QCOM_COMMON_PATH)/system/wfd-legacy/qti-wfd-legacy.mk
-    include $(QCOM_COMMON_PATH)/vendor/wfd-legacy/qti-wfd-legacy.mk
-  else
-    include $(QCOM_COMMON_PATH)/system/wfd/qti-wfd.mk
-  endif
+  include $(QCOM_COMMON_PATH)/system/wfd/qti-wfd.mk
 endif
 
 ifneq (,$(filter wlan, $(TARGET_COMMON_QTI_COMPONENTS)))
